@@ -7,7 +7,7 @@
    <!--- basic page needs
    ================================================== -->
    <meta charset="utf-8">
-	<title>Category: Hardware</title>
+	<title>Category: Machine Learning</title>
 	<meta name="description" content="">  
 	<meta name="author" content="">
 
@@ -54,7 +54,8 @@
 					<li class="has-children current">
 						Categories
 						<ul class="sub-menu">
-			            <li><a href="category_machinelearning.html">Machine Learning</a></li><li><a href="category_microcontroller.html">Microcontroller</a></li>
+			            <li><a href="category_machinelearning.html">Machine Learning</a></li>
+						<li><a href="category_microcontroller.html">Microcontroller</a></li>
 			            <li><a href="category_hardware.html">Hardware</a></li>
 			         </ul>
 					</li>
@@ -105,7 +106,7 @@
    <section id="page-header">
    	<div class="row current-cat">
    		<div class="col-full">
-   			<h1>Category: Hardware</h1>
+   			<h1>Category: Machine Learning</h1>
    		</div>   		
    	</div>
    </section>
@@ -125,8 +126,8 @@
 			 <article class="brick entry format-standard animate-this">
 
 				 <div class="entry-thumb">
-					 <a href="led_sign.html" class="thumb-link">
-						 <img src="images/LED_sign/thumbnail.jpg" alt="LED_thumbnail">
+					 <a href="futuregan_depth.html" class="thumb-link">
+						 <img src="images/FutureGAN/futuregan.v3.png" alt="building">
 					 </a>
 				 </div>
 
@@ -135,17 +136,42 @@
 
 						 <div class="entry-meta">
                			<span class="cat-links">
-               				<a href="category_microcontroller.html">Microcontroller</a>
-               				<a href="category_hardware.html">Hardware</a>
+               				<a href="category_machinelearning.html">Machine Learning</a>
                			</span>
 						 </div>
 
-						 <h1 class="entry-title"><a href="led_sign.html">Giant LED Sign.</a></h1>
+						 <h1 class="entry-title"><a href="futuregan_depth.html">RGB-D Video Generation with GANs.</a></h1>
 
 					 </div>
 					 <div class="entry-excerpt">
-						 A 2 meter long sign with almost 1000 LEDs, fully controlled with a microcontroller reachable using WiFi.
-						 It can display scrolling and static text in all colors, turn a living room into a club or display an animated beer-pong scoreboard.
+						 Can dense depth maps be predicted just as well as RGB video frames? We extend progressively growing GANs to predict future RGB-D video sequences based on a series of input frames.
+					 </div>
+				 </div>
+
+			 </article> <!-- end article -->
+
+			 <article class="brick entry format-standard animate-this">
+
+				 <div class="entry-thumb">
+					 <a href="LSVG.html" class="thumb-link">
+						 <img src="images/LSVG/latent_space_samples.v1.png" alt="LSVG_thumbnail">
+					 </a>
+				 </div>
+
+				 <div class="entry-text">
+					 <div class="entry-header">
+
+						 <div class="entry-meta">
+							<span class="cat-links">
+								<a href="category_machinelearning.html">Machine Learning</a>
+							</span>
+						 </div>
+
+						 <h1 class="entry-title"><a href="led_sign.html">Latent Space Video Generation.</a></h1>
+
+					 </div>
+					 <div class="entry-excerpt">
+						 We experiment with generating continuous videos from single input frames by leveraging smooth latent spaces. We project the input frames into latent space, fit curves to the latent vectors, generate new frames by sampling and apply ML-based postprocessing.
 					 </div>
 				 </div>
 

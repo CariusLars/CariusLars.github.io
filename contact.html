@@ -53,7 +53,7 @@
 					<li class="has-children">
 						Categories
 						<ul class="sub-menu">
-			            <li><a href="category_microcontroller.html">Microcontroller</a></li>
+			            <li><a href="category_machinelearning.html">Machine Learning</a></li><li><a href="category_microcontroller.html">Microcontroller</a></li>
 			            <li><a href="category_hardware.html">Hardware</a></li>
 			         </ul>
 					</li>
@@ -102,30 +102,43 @@
    <!-- content
    ================================================== -->
    <section id="content-wrap" class="site-page">
-   	<div class="row">
-   		<div class="col-twelve">
 
-   			<section>
+	   <div class="row">
+
+		   <div class="col-six tab-full">
+
+			   <h3>Contact Form</h3>
+			   <!-- see tutorial here: https://github.com/toperkin/staticFormEmails -->
+			   <form name="gform" id="gform" enctype="text/plain" action="https://docs.google.com/forms/d/e/1FAIpQLSduWyGUoGJUnPU7PYkLDSmRGtpIY-B1F0kqJMMOgTSAOcChpw/formResponse?" target="hidden_iframe" onsubmit="submitted=true;">
+				   <div>
+					   <label for="entry.1305920875">Your name</label>
+					   <input class="full-width" type="text" placeholder="John Doe" id="entry.1305920875">
+				   </div>
+				   <div>
+					   <label for="entry.127386640">Your email</label>
+					   <input class="full-width" type="email" placeholder="test@mailbox.com" id="entry.127386640">
+				   </div>
+				   <div>
+					   <label for="sampleRecipientInput">Reason for contacting</label>
+					   <div class="ss-custom-select">
+						   <select class="full-width" id="sampleRecipientInput">
+							   <option value="Option 1">Questions</option>
+							   <option value="Option 2">Report</option>
+							   <option value="Option 3">Others</option>
+						   </select>
+					   </div>
+				   </div>
+
+				   <label for="entry.1197511160">Message</label>
+				   <textarea class="full-width" placeholder="Your message" id="entry.1197511160"></textarea>
 
 
-				<!-- see tutorial here: https://github.com/toperkin/staticFormEmails -->
-				<form name="gform" id="gform" enctype="text/plain" action="https://docs.google.com/forms/d/e/1FAIpQLSduWyGUoGJUnPU7PYkLDSmRGtpIY-B1F0kqJMMOgTSAOcChpw/formResponse?" target="hidden_iframe" onsubmit="submitted=true;">
-					Name:<br>
-					<input type="text" name="name" id="entry.1305920875"><br>
-					Email:<br>
-					<input type="text" name="email" id="entry.127386640">
-					Your Message:<br>
-					<input type="text" name="message" id="entry.1197511160">
-					<input type="submit" value="Submit">
-				</form>
-				<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {}"></iframe>
+				   <input class="button-primary full-width-on-mobile" type="submit" value="Submit">
 
+			   </form>
+			   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {}"></iframe>
 
-			</section>
-   		
-
-			</div> <!-- end col-twelve -->
-   	</div> <!-- end row -->		
+		   </div>
    </section> <!-- end content -->
 
    
