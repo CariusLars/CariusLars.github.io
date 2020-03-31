@@ -868,3 +868,21 @@ textarea {
 	clear: both;
 	display: table;
 }
+
+figcaption {
+	/*    float: right; /* Delete Me */
+	font-size: 10px;
+	margin: 0px;
+	text-align: right;  /* ADD Me */
+}
+img.animated-gif{
+	width: 120px;
+	height: auto;
+}
+.flex-container {
+	display: flex;
+	justify-content: center;
+}
+.flex-item {
+	margin: 10px auto;
+}
