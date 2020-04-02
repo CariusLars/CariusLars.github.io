@@ -110,7 +110,7 @@
 
    				<div class="content-media">
 						<div class="post-thumb">
-							<img src="images/FutureGAN/futuregan.png" style="max-width:70%;" >
+							<img src="images/FutureGAN/title.png" style="max-width:100%;" >
 						</div>  
 					</div>
 
@@ -123,12 +123,62 @@
 							<li class="cat"><a href="category_machinelearning.html">Machine Learning</a></li>
 						</ul>						
 
-						<p class="lead">This interesting blogpost is soon to come</p>
+						<p class="lead">Video Prediction using Generative Adversarial Networks (GANs) is a hot topic in current research. We expanded an
+						existing approach to predict dense depth maps alongside the RGB video frames and studied the performance under a series of different conditions</p>
 
-						<p> This blogpost is still in the making.
+						<p> This blogpost is still in the making.https://arxiv.org/abs/1810.01325
 						</p>
+						<figure>
+							<img src="images/FutureGAN/FutureGAN.png" style="width:100%">
+						</figure>
+
+						<figure>
+							<img src="images/FutureGAN/FutureGAN_Framework.png" style="width:100%">
+							<figcaption>Image taken from <a href="https://github.com/TUM-LMF/FutureGAN">here</a></figcaption>
+						</figure>
 
 
+						<figure>
+							<img src="images/FutureGAN/onesample.gif" style="width:100%">
+						</figure>
+						<figure>
+							<img src="images/FutureGAN/loss.png" style="width:100%">
+						</figure>
+						<figure>
+							<img src="images/FutureGAN/overfit.gif" style="width:40%">
+						</figure>
+						<figure>
+							<img src="images/FutureGAN/FutureGAN_scores.svg" style="width:100%">
+						</figure>
+						<figure>
+							<img src="images/FutureGAN/futuregan.png" style="width:100%">
+						</figure>
+						<table class="tg">
+							<tr>
+								<th class="tg-wp8o">Ground Truth</th>
+								<th class="tg-wp8o">RGB → RGB</th>
+								<th class="tg-wp8o">RGB-D → RGB</th>
+								<th class="tg-wp8o">RGB → RGB-D</th>
+								<th class="tg-wp8o">RGB-D → RGB-D</th>
+							</tr>
+							<tr>
+								<td class="tg-wp8o" align="center"><img src="images/FutureGAN/ground_truth.gif" style="width:40px"></td>
+								<td class="tg-wp8o"><img src="images/FutureGAN/no_depth.gif" style="width:40px"></td>
+								<td class="tg-wp8o"><img src="images/FutureGAN/depth_in.gif" style="width:40px"></td>
+								<td class="tg-wp8o"><img src="images/FutureGAN/depth_out.gif" style="width:40px"></td>
+								<td class="tg-wp8o"><img src="images/FutureGAN/depth.gif" style="width:40px"></td>
+							</tr>
+							<tr>
+								<td class="tg-wp8o"><img src="images/FutureGAN/ground_truth_depth.gif" style="width:40px"></td>
+								<td class="tg-wp8o"></td>
+								<td class="tg-wp8o"></td>
+								<td class="tg-wp8o"><img src="images/FutureGAN/depth_out_depth.gif" style="width:40px"></td>
+								<td class="tg-wp8o"><img src="images/FutureGAN/depth_depth.gif" style="width:40px"></td>
+							</tr>
+						</table>
+
+
+						<p>CLOSING REMARKS HERE. If you have any questions, drop me a message! For technical details of our implementation, check out my <a href="https://github.com/CariusLars/ImprovingVideoGeneration">GitHub Repo</a>. Thanks for reading!</p>
 						<!--<h2>Large Heading</h2>
 
 						<p>Harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus <a href="http://#">omnis voluptas assumenda est</a> id quod maxime placeat facere possimus, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et.</p>
