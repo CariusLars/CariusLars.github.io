@@ -123,15 +123,23 @@
 							<li class="cat"><a href="category_machinelearning.html">Machine Learning</a></li>
 						</ul>						
 
-						<p class="lead">Video Prediction using Generative Adversarial Networks (GANs) is a hot topic in current research. We expanded an
+						<p class="lead">Video Prediction using Generative Adversarial Networks is a hot topic in current research. We expanded an
 						existing approach to predict dense depth maps alongside the RGB video frames and studied the performance under a series of different conditions</p>
 
-						<p> This blogpost is still in the making.https://arxiv.org/abs/1810.01325
-						</p>
+						<p> There is a lively discussion about how to best generate video clips using Generative Adversarial Networks (GANs). One of the hot questions is how much
+						physical modeling a system needs to generate realistic videos. While some approaches combine neural networks with physical models of camera motion and ray-tracing,
+						others separate fore- and background into two different learning pipelines. In our project, we chose to work with FutureGAN, an approach free of any physical models and
+						and solely based on deep learning. You can read the initial publication <a href="https://arxiv.org/abs/1810.01325">here</a>.</p>
+						<p>While predicting future video sequences from a short input clip certainly is very fascinating and has many use-cases, the classic videos we know lack one important aspect: proportions.
+						Sure, we can detect objects in a video, but we can never tell how far an object is away if we don't know it's size. If object A is twice as big but twice as far away as object B, they appear exactly
+						the same in a video frame. This is why we researched the ability of FutureGAN to not only predict video frames, but also dense depth maps. You can imagine a dense depth map as an image in which the color
+						of each pixel depends on how far the object at that location is away from the camera. Robots, for example, can use this additional information to build a 3D-map of their environment and place the objects
+						they detect in the video into perspective.</p>
+						<p>Before we look at incorporating depth predictions, let's have a look how standard video prediction works in FutureGAN. </p>
 						<figure>
 							<img src="images/FutureGAN/FutureGAN.png" style="width:100%">
 						</figure>
-
+						<p>The scheme above shows the high-level principle of FutureGAN.</p>
 						<figure>
 							<img src="images/FutureGAN/FutureGAN_Framework.png" style="width:100%">
 							<figcaption>Image taken from <a href="https://github.com/TUM-LMF/FutureGAN">here</a></figcaption>
