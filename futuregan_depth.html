@@ -200,7 +200,17 @@
 						<figure>
 							<img src="images/FutureGAN/FutureGAN_scores.svg" style="width:100%">
 						</figure>
-						<p>You can see the results of our study in the table above.</p>
+						<p>You can see the results of our study in the table above. Let me first explain the different error measurements. MSE stands for Mean Squared Error: We generate a video that we have the ground truth of and simply compare the differences of all pixels between the generated and real
+						video frames. The mean value of all those differences is the MSE, the lower it is, the closer to the true video are we. PSNR stands for Peak Signal to Noise Ratio: The higher this value, the clearer our images are, meaning we have less noise and pertubations. Finally, we have
+						the Structural Similarity index (SSIM). It aims to measure the humanly perceived differences between the generated and ground truth video by taking into account a range of different terms. The higher it is, the better, you can find a more technical explanation of the SSIM score <a href="https://en.wikipedia.org/wiki/Structural_similarity">here</a>.
+						The last two rows calculate MSE and PSNR on the depth maps, a SSIM formula for depth maps does not exist. Bold numbers in the table highlight the best score per error criterion.
+						</p>
+						<p>
+						Now to the results: The first thing we notice is that if our goal is generating RGB videos, we get noticeably better scores if we only input RGB, not RGB-D. This means that our network does not draw additional information from the depth maps we supply as input, it seems to rather get confused by the extra information and thus decrease in performance. <br>
+						If we also predict depth maps, the RGB performance degrades even more. That, however, is expected, because the network has to learn additional information to predict RGB-D videos and we not train longer than the baseline we compare against.
+						We can see even more interesting results in the scores of our RGB-D video generation runs. As expected, the network can predict better depth maps if it also gets RGB-D input video clips. Surprisingly though, our adapted version of FutureGAN still predicts quite accurate depth frames even if we only input RGB video data.
+						That means that the network can infer the most likely depth at each pixel solely from color camera input. Moreover, the performance drop between predicting RGB videos and predicting RGB-D videos is noticeable, but not massive. This means if we have depth data available at train time,
+						we can teach our network to predict depth data without depth input at test time and, at the same time, without loosing a lot of RGB video quality. Here are our results in motion:</p>
 
 						<table class="tg">
 							<tr>
@@ -211,7 +221,7 @@
 								<th class="tg-wp8o">RGB-D → RGB-D</th>
 							</tr>
 							<tr>
-								<td class="tg-wp8o" align="center"><img src="images/FutureGAN/ground_truth.gif" style="width:40px"></td>
+								<td class="tg-wp8o"><img src="images/FutureGAN/ground_truth.gif" style="width:40px"></td>
 								<td class="tg-wp8o"><img src="images/FutureGAN/no_depth.gif" style="width:40px"></td>
 								<td class="tg-wp8o"><img src="images/FutureGAN/depth_in.gif" style="width:40px"></td>
 								<td class="tg-wp8o"><img src="images/FutureGAN/depth_out.gif" style="width:40px"></td>
@@ -225,58 +235,18 @@
 								<td class="tg-wp8o"><img src="images/FutureGAN/depth_depth.gif" style="width:40px"></td>
 							</tr>
 						</table>
-
+						<p>For the human eye, the depth predictions (lower row) are quite noisy, but the accuracy is still high. To better compare the RGB performance, you can see the approaches side by side in form of an unrolled video sequence. Again, the first six frames are input, the following six are predicted:</p>
 						<figure>
 							<img src="images/FutureGAN/futuregan.png" style="width:100%">
 						</figure>
+						<p>From top to bottom, the figure shows ground truth, RGB to RGB, RGB-D to RGB, RGB to RGB-D and RGB-D to RGB-D. Sure, the guy in the green jumper that is lifting his arm in this sequence looks a lot more blurry in the generated videos compared to the ground truth,
+						but taking into account that this version of FutureGAN was trained on about 200000 different videos, it's quite impressive that all approaches correctly predict the human, its pose and even the color of his face and clothing.</p>
+						<p>All in all, we made some highly interesting discoveries here. We saw that the knowledge of depth values does not help the model to predict better RGB videos, at least as long as we do not model any explicit relation between the depth and the "classic" video input. We also showed that FutureGAN is very well
+						capable of predicting consistent RGB-D video sequences, even without depth sensors being available at test time. This can lead to some useful applications, you could, for example, train a network with some RGB-D videos you captured in the surroundings you intend to use your robot in. Then, your robot could use camera
+						and depth based navigation even without having an expensive depth scanner, but solely by piping all it's camera input through our version of FutureGAN.</p>
+						<p>Hopefully, this article got you interested in the countless usecases of Generative Adversarial Networks. FutureGAN is publicly available <a href="https://github.com/TUM-LMF/FutureGAN">here</a>, you can find our adapted implementation in my <a href="https://github.com/CariusLars/ImprovingVideoGeneration">GitHub Repo</a>. Feel free
+						to play around with it! If you have any questions, just drop me a message! Thanks for reading!</p>
 
-						<p>CLOSING REMARKS HERE. If you have any questions, drop me a message! For technical details of our implementation, check out my <a href="https://github.com/CariusLars/ImprovingVideoGeneration">GitHub Repo</a>. Thanks for reading!</p>
-						<!--<h2>Large Heading</h2>
-
-						<p>Harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus <a href="http://#">omnis voluptas assumenda est</a> id quod maxime placeat facere possimus, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et.</p>
-
-						<blockquote><p>This is a simple example of a styled blockquote. A blockquote tag typically specifies a section that is quoted from another source of some sort, or highlighting text in your post.</p></blockquote>
-
-						<p>Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing in amet Ut nulla nisi non ut enim aliqua laborum mollit quis nostrud sed sed..</p>
-
-						<h3>Smaller Heading</h3>
-
-						<p>Quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-
-						<p>Quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-
-<pre><code>
-code {
-   font-size: 1.4rem;
-   margin: 0 .2rem;
-   padding: .2rem .6rem;
-   white-space: nowrap;
-   background: #F1F1F1;
-   border: 1px solid #E1E1E1;	
-   border-radius: 3px;
-}
-</code></pre>
-
-						<p>Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa.</p>
-
-						<ul>
-							<li>Donec nulla non metus auctor fringilla.
-								<ul>
-									<li>Lorem ipsum dolor sit amet.</li>
-									<li>Lorem ipsum dolor sit amet.</li>
-									<li>Lorem ipsum dolor sit amet.</li>
-								</ul>
-							</li>
-							<li>Donec nulla non metus auctor fringilla.</li>
-							<li>Donec nulla non metus auctor fringilla.</li>
-						</ul>
-
-						<p>Odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing in amet Ut nulla nisi non ut enim aliqua laborum mollit quis nostrud sed sed..</p>
--->
-						<!--<p class="tags">
-		  			     	<span>Tagged in :</span>
-		  				  	<a href="#">orci</a><a href="#">lectus</a><a href="#">varius</a><a href="#">turpis</a>
-		  			   </p>-->
 
 		  			   <div class="author-profile">
 		  			   	<img src="images/avatars/lars_speaker.jpg" alt="">
