@@ -139,28 +139,69 @@
 						<figure>
 							<img src="images/FutureGAN/FutureGAN.png" style="width:100%">
 						</figure>
-						<p>The scheme above shows the high-level principle of FutureGAN.</p>
+						<p>The scheme above shows the high-level principle of FutureGAN. Essentially, the network takes in six consecutive frames of a video and predicts the following six frames. The images are input as a stacked sequence, resulting in a block
+						of six images times 3 channels (RGB). The first part of the network is a classic fully-convolutional encoder. In less technical terms, it applies a range of filters to the input to condense the information contained in our input video sequence
+						down to a low-dimensional representation (the latent space representation).<br>
+						The second component of FutureGAN is, as the name suggests, a GAN. From the latent representation of our input frames, it generates six RGB images. When well trained, these images can be concatenated into a continous video clip together with the input frames.<br>
+						For an easy-to-understand explanation of latent space and GANs, have a look at <a href="https://cariuslars.github.io/LSVG.html">my blog post about Latent Space Video Generation</a>.</p>
+						<p>As you can probably imagine, predicting accurate videos is a very hard task. GANs have a high potential for difficult tasks, but they are notoriously hard to train. To achieve more stable learning and thus generate better videos,
+						FutureGAN leverages a training technique known as Progressive Growing (PG).</p>
 						<figure>
 							<img src="images/FutureGAN/FutureGAN_Framework.png" style="width:100%">
 							<figcaption>Image taken from <a href="https://github.com/TUM-LMF/FutureGAN">here</a></figcaption>
 						</figure>
-
-
-						<figure>
-							<img src="images/FutureGAN/onesample.gif" style="width:100%">
-						</figure>
+						<p>I know, that schema is a bit overwhelming at first. Let's start with the bottom row. In the row itself, you can nicely recognize the classic GAN architecture. There's a generator to generate fake samples and a discriminator that
+						alternately receives fake and real samples and tries to assign each of them with a score representing their realness. The only difference is the structure of our Generator: To condition our generated videos on the input sequence,
+						it has an encoder-decoder structure, just as described in the previous section. <br>
+						Now let's get to the Progressive Growing. Imagine you had to describe a picture to a friend. You'd probably start with the high level structure, like "there's a person and a red car". You'd then go on and on until you reach very fine-grained
+						details like "there's a leaf on the left front mirror of the car". The basic idea of Progressive Growing is very similar: We want to learn the very basic and high-level features of out input videos first, so we downsample them to 4 by 4 pixels
+						resolution. That's next level basic, we don't even start with "there's a red car", we start with "there's red. And a bit of black, that's it". We simply shrink out encoder-decoder generator and only use the middle layers which receive 4x4px input and
+						also predict 4x4px output. We shrink out discriminator in the same way and also downsample the real sample it gets as input.<br>
+						After we've trained like this for a while and are able to predict near-perfect 4 by 4 videos that the discriminator can't distinguish from real ones, we double our resolution to 8x8. In order to not loose the high-level features we learned in the previous step,
+						we keep the trained "middle layers" and just append additional convolutional layers to the generator (on both sides) and to the discriminator (on the left side). FutureGAN also uses a method to slowly fade in those layers using a ResNet-structure,
+						but that is not really important for you to understand right now. We keep growing our network whenever the previous resolutions training hits a stable level until we reach our goal video resolution. The network has then learned features on all abstraction levels
+						which leads to a lot better performance and more stable learning than starting at full resolution from the beginning. <br>
+						If you're interested in learning more about Progressive Growing, I can highly recommend reading <a href="https://arxiv.org/abs/1710.10196">this paper</a>, they show very impressive results.
+						</p>
+						<p>This has been a lot of theory to take in, so let's look at some visualizations to sum up what we've learned up until here.</p>
 						<figure>
 							<img src="images/FutureGAN/loss.png" style="width:100%">
 						</figure>
+						<p>This curve is called the discriminator loss. It shows the scores which the discriminator gives to the generated videos over training time. Very abstractly speaking, a score close to 0 means the generator has come up with a realistic video,
+						large negative scores means the discriminator could easily tell that the video clip was fake. <br>
+						You can nicely see the overall trend of the learning process here. Every time we increase the video resolution, the scores decrease as the network has no idea about the new features yet. It then slowly learns them and manages to produce better and better
+						videos until the performance stabilizes and we again grow our architecture.</p>
+						<p>If you feed the network with the same sample every so many steps, you can even "watch" it learning:</p>
+						<figure>
+							<img src="images/FutureGAN/onesample.gif" style="width:100%">
+						</figure>
+						<p> What you see is a unrolled video clip. The first six images are fed into FutureGAN as input, the last six images are predicted by the network. You can see how in all resolutions, the predictions continuously get better and the whole sequence
+						turns into a consistent video clip. The slight changes you see in the input frames are due to random noise which is added to facilitate a more stable learning and prevent overfitting (nothing you have to worry about to understand this blog post).<br>
+						At a resolution of 128 by 128 pixels, the generated video looks like this:
+						</p>
 						<figure>
 							<img src="images/FutureGAN/overfit.gif" style="width:40%">
 						</figure>
+						<p>Here, the frames with a black border are input, the ones with a red border are predicted. Pretty impressive, right?<br>
+						Now we can finally get to the core of our research project. Remember that at the beginning of this blog post, I told you that so-called depth maps are very useful to have available alongside your color video frames, especially for navigation tasks.
+						The FutureGAN architecture makes it very easy for us to incorporate depth predictions as the in- and output are a stack of individual image channels anyway. We simply adapt the filters in the convolutional layers to deal with additional input or output
+						channels. This means we do not give the network any information on how depth works or how it is related to any of the other image channels, we simply throw it into the mix and hope that the network figures it out by itself. <br>
+						In order to treat the depth channel as just another image channel, we need to normalize it. This is necessary because all our color values lie between -1 and 1, so if the depth channel suddenly reports a value of 10000, that would
+						immediately send the learning process into failure (if you want to learn why, read up on a phenomenon called exploding gradients). In order to normalize the depth between -1 and 1, we need to know the maximum and minimum value of all
+						depth measurements that could ever appear. The minimum is quite easy, it's 0. For the maximum, we simply choose the maximum depth the camera from our dataset can detect, which is 10 meters.</p>
+						<p>Now, how do you properly research whether adding something to an existing architecture improves the results? You have to conduct an ablation study. In this context, an ablation study means that you have to try out all combinations of your idea
+						in order to scientifically analyze its effect. In our case, this means that we have to built the depth maps into FutureGAN at different positions. The four possibilities are:
+						<ul>
+							<li>Input RGB video, predict RGB video</li>
+							<li>Input RGB-D (RGB and Depth) video, predict RGB video</li>
+							<li>Input RGB video, predict RGB-D video</li>
+							<li>Input RGB-D video, predict RGB-D video</li>
+						</ul> </p>
 						<figure>
 							<img src="images/FutureGAN/FutureGAN_scores.svg" style="width:100%">
 						</figure>
-						<figure>
-							<img src="images/FutureGAN/futuregan.png" style="width:100%">
-						</figure>
+						<p>You can see the results of our study in the table above.</p>
+
 						<table class="tg">
 							<tr>
 								<th class="tg-wp8o">Ground Truth</th>
@@ -185,6 +226,9 @@
 							</tr>
 						</table>
 
+						<figure>
+							<img src="images/FutureGAN/futuregan.png" style="width:100%">
+						</figure>
 
 						<p>CLOSING REMARKS HERE. If you have any questions, drop me a message! For technical details of our implementation, check out my <a href="https://github.com/CariusLars/ImprovingVideoGeneration">GitHub Repo</a>. Thanks for reading!</p>
 						<!--<h2>Large Heading</h2>
