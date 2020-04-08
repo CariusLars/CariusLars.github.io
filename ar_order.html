@@ -7,7 +7,7 @@
    <!--- basic page needs
    ================================================== -->
    <meta charset="utf-8">
-	<title>Category: Machine Learning</title>
+	<title>AR Food & Drinks</title>
 	<meta name="description" content="">  
 	<meta name="author" content="">
 
@@ -51,15 +51,14 @@
 	   	<nav id="main-nav-wrap">
 				<ul class="main-navigation sf-menu">
 					<li><a href="index.html" title="">Home</a></li>									
-					<li class="has-children current">
+					<li class="has-children">
 						Categories
 						<ul class="sub-menu">
-			            <li><a href="category_machinelearning.html">Machine Learning</a></li>
-						<li><a href="category_microcontroller.html">Microcontroller</a></li>
+			            <li><a href="category_machinelearning.html">Machine Learning</a></li><li><a href="category_ar.html">Augmented Reality</a></li><li><a href="category_microcontroller.html">Microcontroller</a></li>
 			            <li><a href="category_hardware.html">Hardware</a></li>
 			         </ul>
 					</li>
-					<li class="has-children">
+					<li class="has-children current">
 						Blog
 						<ul class="sub-menu">
 			            <!-- <li><a href="single-video.html">Video Post</a></li>
@@ -69,7 +68,7 @@
 						<li><a href="ar_order.html">Augmented Reality Beer Orders</a></li><li><a href="led_sign.html">LED Sign</a></li>
 						<li><a href="futuregan_depth.html">RGB-D Video GAN</a></li>
 						<li><a href="LSVG.html">Latent Space Video Generation</a></li><li><a href="coopRL.html">Cooperative Reinforcement Learning</a></li>
-						</ul>
+			         </ul>
 					</li>
 					<!--<li><a href="style-guide.html" title="">Styles</a></li>-->
 					<li><a href="about.html" title="">About Me</a></li>
@@ -99,135 +98,62 @@
    	</div>     		
    	
    </header> <!-- end header -->
-
-
-   <!-- page header
-   ================================================== -->
-   <section id="page-header">
-   	<div class="row current-cat">
-   		<div class="col-full">
-   			<h1>Category: Machine Learning</h1>
-   		</div>   		
-   	</div>
-   </section>
-
    
-   <!-- masonry
+
+   <!-- content
    ================================================== -->
-   <section id="bricks" class="with-top-sep">
+   <section id="content-wrap" class="blog-single">
+   	<div class="row">
+   		<div class="col-twelve">
 
-   	<div class="row masonry">
+   			<article class="format-standard">  
 
-   		<!-- brick-wrapper -->
-         <div class="bricks-wrapper">
+   				<div class="content-media">
+					<div class="post-thumb">
+						<img src="images/YBH/YB_Hack.jpeg" style="max-width:100%;" >
+					</div>
+				</div>
 
-         	<div class="grid-sizer"></div>
+				<div class="primary-content">
 
-			 <article class="brick entry format-standard animate-this">
+					<h1 class="page-title">Food & Beer Orders using Augmented Reality in Stadiums</h1>
 
-				 <div class="entry-thumb">
-					 <a href="futuregan_depth.html" class="thumb-link">
-						 <img src="images/FutureGAN/futuregan.v3.png" alt="building">
-					 </a>
-				 </div>
+					<ul class="entry-meta">
+						<li class="date">October 20th, 2019</li>
+						<li class="cat"><a href="category_ar.html">Augmented Reality</a></li>
+					</ul>
 
-				 <div class="entry-text">
-					 <div class="entry-header">
+					<p class="lead"> This blogpost is still in the making</p>
 
-						 <div class="entry-meta">
-               			<span class="cat-links">
-               				<a href="category_machinelearning.html">Machine Learning</a>
-               			</span>
-						 </div>
+					<!--<p class="tags">
+						<span>Tagged in :</span>
+						<a href="#">orci</a><a href="#">lectus</a><a href="#">varius</a><a href="#">turpis</a>
+				   </p>-->
+				</div>
+				<div class="author-profile">
+					<img src="images/avatars/lars_speaker.jpg" alt="">
 
-						 <h1 class="entry-title"><a href="futuregan_depth.html">RGB-D Video Generation with GANs.</a></h1>
+					<div class="about">
+						<h4><a href="#">Lars Carius</a></h4>
 
-					 </div>
-					 <div class="entry-excerpt">
-						 Can dense depth maps be predicted just as well as RGB video frames? We extend progressively growing GANs to predict future RGB-D video sequences based on a series of input frames.
-					 </div>
-				 </div>
+						<p>Master student of "Robotics, Cognition, Intelligence" at TU Munich. Entrepreneur with passion for computer vision, augmented reality, machine learning and simulation.
+						</p>
 
-			 </article> <!-- end article -->
+						<ul class="author-social">
+							<li><a href="http://www.linkedin.com/in/lars-carius">LinkedIn</a></li>
+						</ul>
+					</div>
 
-			 <article class="brick entry format-standard animate-this">
+				</div> <!-- end entry-primary -->
 
-				 <div class="entry-thumb">
-					 <a href="LSVG.html" class="thumb-link">
-						 <img src="images/LSVG/latent_space_samples.v1.png" alt="LSVG_thumbnail">
-					 </a>
-				 </div>
-
-				 <div class="entry-text">
-					 <div class="entry-header">
-
-						 <div class="entry-meta">
-							<span class="cat-links">
-								<a href="category_machinelearning.html">Machine Learning</a>
-							</span>
-						 </div>
-
-						 <h1 class="entry-title"><a href="led_sign.html">Latent Space Video Generation.</a></h1>
-
-					 </div>
-					 <div class="entry-excerpt">
-						 We experiment with generating continuous videos from single input frames by leveraging smooth latent spaces. We project the input frames into latent space, fit curves to the latent vectors, generate new frames by sampling and apply ML-based postprocessing.
-					 </div>
-				 </div>
-
-			 </article> <!-- end article -->
-			 <article class="brick entry format-standard animate-this">
-
-				 <div class="entry-thumb">
-					 <a href="coopRL.html" class="thumb-link">
-						 <img src="images/CoopRL/thumb.jpeg" alt="CoopRL_thumbnail">
-					 </a>
-				 </div>
-
-				 <div class="entry-text">
-					 <div class="entry-header">
-
-						 <div class="entry-meta">
-								<span class="cat-links">
-									<a href="category_machinelearning.html">Machine Learning</a>
-								</span>
-						 </div>
-
-						 <h1 class="entry-title"><a href="coopRL.html">Cooperative Reinforcement Learning for Games.</a></h1>
-
-					 </div>
-					 <div class="entry-excerpt">
-						 Can cooperative behaviour be learned from scratch using Reinforcement Learning? In my Bachelor's Thesis, I train models in self-made multi-agent games to show that it is possible.
-					 </div>
-				 </div>
-
-			 </article> <!-- end article -->
-
-         </div> <!-- end brick-wrapper --> 
-
+			</article>
+		</div> <!-- end col-twelve -->
    	</div> <!-- end row -->
 
-   	<!--<div class="row">
 
-   		<nav class="pagination">
-		      <span class="page-numbers prev inactive">Prev</span>
-		   	<span class="page-numbers current">1</span>
-		   	<a href="#" class="page-numbers">2</a>
-		      <a href="#" class="page-numbers">3</a>
-		      <a href="#" class="page-numbers">4</a>
-		      <a href="#" class="page-numbers">5</a>
-		      <a href="#" class="page-numbers">6</a>
-		      <a href="#" class="page-numbers">7</a>
-		      <a href="#" class="page-numbers">8</a>
-		      <a href="#" class="page-numbers">9</a>
-		   	<a href="#" class="page-numbers next">Next</a>
-	      </nav>
+   </section> <!-- end content -->
 
-   	</div>-->
 
-   </section> <!-- bricks -->
-
-   
    <!-- footer
    ================================================== -->
    <footer>
